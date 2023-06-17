@@ -5,6 +5,7 @@ import cors from "cors";
 
 class Server {
   private app: Application;
+  private API: string = "/api";
 
   constructor() {
     this.app = express();
@@ -33,7 +34,7 @@ class Server {
    * @memberof Server
    */
   public routes(): void {
-    this.app.use("/api", indexRoutes);
+    this.app.use(`${this.API}`, indexRoutes);
   }
 
   /**
