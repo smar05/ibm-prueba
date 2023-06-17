@@ -9,7 +9,7 @@ class IndexRoutes {
   }
 
   public config(): void {
-    this.router.get("/", indexController.index);
+    this.router.get("/llaves", indexController.llaves);
   }
 
   // Getters y Setters
