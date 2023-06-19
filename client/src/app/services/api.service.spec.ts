@@ -4,10 +4,14 @@ import { ApiService } from './api.service';
 
 describe('ApiService', () => {
   let service: ApiService;
+  let httpClientSpy: { post: jasmine.Spy };
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ApiService);
+
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['post', 'get']);
+
+    service = new ApiService(httpClientSpy as any);
   });
 
   it('should be created', () => {

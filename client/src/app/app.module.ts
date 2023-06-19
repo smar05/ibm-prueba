@@ -8,10 +8,10 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { FormularioComponent } from './pages/formulario/formulario.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalComponent } from './components/modal/modal.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     BrowserAnimationsModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    MatDialogModule,
+    UntypedFormBuilder,
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

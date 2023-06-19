@@ -20,7 +20,7 @@ export class FormularioComponent implements OnInit {
 
   // Grupo de controles
   public f = this.form.group({
-    numeroDocumento: [''],
+    numeroDocumento: ['', Validators.required],
     documentoCifrado: [''],
     nombre: [
       '',
