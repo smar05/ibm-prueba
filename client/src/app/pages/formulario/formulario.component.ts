@@ -1,3 +1,4 @@
+import { ModalComponent } from './../../components/modal/modal.component';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,6 +8,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Forge } from 'src/assets/ts/forge';
 import { EnumRutasPaginas } from 'src/enums/enumRutasPaginas';
 import { EnumSessionStorage } from 'src/enums/enumSessionStorage';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-formulario',
@@ -18,7 +20,7 @@ export class FormularioComponent implements OnInit {
 
   // Grupo de controles
   public f = this.form.group({
-    numeroDocumento: ['', Validators.required],
+    numeroDocumento: [''],
     documentoCifrado: [''],
     nombre: [
       '',
@@ -47,7 +49,8 @@ export class FormularioComponent implements OnInit {
   constructor(
     private router: Router,
     private form: UntypedFormBuilder,
-    private apiService: ApiService
+    private apiService: ApiService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -76,14 +79,18 @@ export class FormularioComponent implements OnInit {
       nombre: this.nombre.value,
     };
 
-    let dataRecibida: any = await this.apiService
-      .postEscenario(data)
-      .toPromise();
+    let dataRecibida: any;
+
+    try {
+      dataRecibida = await this.apiService.postEscenario(data).toPromise();
+    } catch (error) {}
 
     let dataRecibidaDesencriptada: any = {
       exitoso: dataRecibida.exitoso,
       mensaje: Forge.desencriptarValor(this.keys, dataRecibida.mensaje),
     };
+
+    this.openModal(dataRecibidaDesencriptada);
   }
 
   /**
@@ -102,5 +109,25 @@ export class FormularioComponent implements OnInit {
     let elementoEncriptado: any = document.getElementById('documentoCifrado');
 
     this.documentoCifrado.setValue(elementoEncriptado.value);
+  }
+
+  /**
+   * Ventana modal
+   *
+   * @param {*} data
+   * @memberof FormularioComponent
+   */
+  public openModal(data: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = 'custom-modal';
+    dialogConfig.data = {
+      data,
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, dialogConfig);
+    //actualizar estado de la tabla
+    dialogRef.afterClosed().subscribe((result) => {
+      this.f.reset();
+    });
   }
 }

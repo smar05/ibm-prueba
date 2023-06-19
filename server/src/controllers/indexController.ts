@@ -74,9 +74,9 @@ class IndexController {
             console.error("Error: No se han envidado todos los datos");
 
             console.error("Request: ", req);
-            console.error("Respnse: ", res);
+            console.error("Response: ", res);
 
-            res.status(500).json({
+            res.status(200).json({
               exitoso: false,
               mensaje: functions.encriptarValor(
                 keys.publicKey,
@@ -88,7 +88,7 @@ class IndexController {
               exitoso: true,
               mensaje: functions.encriptarValor(
                 keys.publicKey,
-                "¡DATOSRECIBIDOS!"
+                "¡DATOS RECIBIDOS!"
               ),
             };
 

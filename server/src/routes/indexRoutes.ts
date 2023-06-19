@@ -8,6 +8,11 @@ class IndexRoutes {
     this.config();
   }
 
+  /**
+   * Configuracion de las rutas
+   *
+   * @memberof IndexRoutes
+   */
   public config(): void {
     this.router.get("/llaves", indexController.llaves);
     this.router.post("/escenario", indexController.escenario);
