@@ -1,1 +1,72 @@
-<p>formulario works!</p>
+<div class="col-md-8 offset-md-2">
+  <div class="card">
+    <div class="card-body">
+      <form autocomplete="off" [formGroup]="f" (ngSubmit)="save()">
+        <div class="form-group">
+          <input
+            formControlName="numeroDocumento"
+            type="text"
+            name="numeroDocumento"
+            placeholder="Número de documento"
+            class="form-control"
+            autofocus
+            [ngClass]="{
+              'is-invalid': numeroDocumento.invalid
+            }"
+            (blur)="blurNumeroDocumento()"
+            id="numeroDocumento"
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              numeroDocumento.invalid && numeroDocumento.errors
+                ? numeroDocumento.errors['required']
+                : false
+            "
+            >Por favor coloque un numero de documento</span
+          >
+        </div>
+
+        <div class="form-group" [hidden]="true">
+          <input
+            formControlName="documentoCifrado"
+            type="text"
+            name="documentoCifrado"
+            class="form-control"
+            id="documentoCifrado"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            formControlName="nombre"
+            type="text"
+            name="nombre"
+            placeholder="Nombre"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': nombre.invalid
+            }"
+          />
+          <span
+            class="invalid-feedback"
+            *ngIf="
+              nombre.invalid && nombre.errors
+                ? nombre.errors['required']
+                : false
+            "
+            >Por favor coloque un nombre</span
+          >
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-success btn-block"
+          [disabled]="this.f.invalid"
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

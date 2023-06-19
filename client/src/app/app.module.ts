@@ -8,6 +8,8 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { FormularioComponent } from './pages/formulario/formulario.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +17,12 @@ import { HttpClientModule } from '@angular/common/http';
     InicioComponent,
     FormularioComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

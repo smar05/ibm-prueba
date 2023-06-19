@@ -32,10 +32,10 @@ export class functions {
    * @static
    * @param {*} keys
    * @param {string} valorEncriptado
-   * @return {*}
+   * @return {*} {string}
    * @memberof functions
    */
-  static desencriptarValor(keys: any, valorEncriptado: string) {
+  static desencriptarValor(keys: any, valorEncriptado: string): string {
     console.info("Inicia metodo para desencriptar la informacion");
 
     const privateKeyPem = keys.privateKey;

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { functions } from "../common/functions";
 import { Ikeys } from "../interfaces/ikeys";
+import { IescenarioData } from "../interfaces/iescenarioData";
 
 class IndexController {
   constructor() {}
@@ -46,14 +47,16 @@ class IndexController {
   public async escenario(req: Request, res: Response): Promise<void> {
     console.info("Inicia metodo para saber el escenario");
 
-    if (!req.body || !req.body.flujo) {
+    let body: IescenarioData = req.body;
+
+    if (!body || !body.flujo) {
       console.error("Error: No se ha enviado un escenario");
       res
         .status(500)
         .json({ error: "Error genérico. No se ha enviado un escenario" });
     } else {
       let keys: Ikeys = functions.leerLlavesPublicasLocales();
-      let flujoEncriptado: string = req.body.flujo;
+      let flujoEncriptado: string = body.flujo;
 
       let flujo: string = functions.desencriptarValor(keys, flujoEncriptado);
 
@@ -64,6 +67,34 @@ class IndexController {
             "Formulario"
           );
           res.json({ flujo: valorEncriptado });
+          break;
+
+        case "Formulario":
+          if (!(body.numDocumento && body.nombre)) {
+            console.error("Error: No se han envidado todos los datos");
+
+            console.error("Request: ", req);
+            console.error("Respnse: ", res);
+
+            res.status(500).json({
+              exitoso: false,
+              mensaje: functions.encriptarValor(
+                keys.publicKey,
+                "¡DATOS INCORRECTOS!"
+              ),
+            });
+          } else {
+            let data: any = {
+              exitoso: true,
+              mensaje: functions.encriptarValor(
+                keys.publicKey,
+                "¡DATOSRECIBIDOS!"
+              ),
+            };
+
+            res.json(data);
+          }
+
           break;
 
         default:
