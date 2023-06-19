@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import indexRoutes from "./routes/indexRoutes";
 import morgan from "morgan";
 import cors from "cors";
+import { swaggerDocs } from "./swagger/swagger";
 
 class Server {
   private app: Application;
@@ -47,6 +48,8 @@ class Server {
   public start(): void {
     this.app.listen(this.app.get("port"), () => {
       console.log("Server on port: " + this.app.get("port"));
+
+      swaggerDocs(this.app, this.app.get("port"));
     });
   }
 }
