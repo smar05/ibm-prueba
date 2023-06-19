@@ -10,6 +10,7 @@ class IndexRoutes {
 
   public config(): void {
     this.router.get("/llaves", indexController.llaves);
+    this.router.post("/escenario", indexController.escenario);
   }
 
   // Getters y Setters

@@ -45,3 +45,6 @@ client/typings
 # System files
 client/.DS_Store
 client/Thumbs.db
+server/src/assets/keys/privateKey.txt
+server/src/assets/keys/publicKey.txt
+server/build/index.js

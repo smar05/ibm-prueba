@@ -6,9 +6,11 @@ import cors from "cors";
 class Server {
   private app: Application;
   private API: string = "/api";
+  private bodyParser = require("body-parser");
 
   constructor() {
     this.app = express();
+    this.app.use(this.bodyParser.json());
 
     // Se inicializa la configuracion y las rutas
     this.config();

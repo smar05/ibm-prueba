@@ -17,7 +17,18 @@ export class ApiService {
    * @return {*}  {Observable<any>}
    * @memberof ApiService
    */
-  public getLlave(): Observable<any> {
+  public getLlaves(): Observable<any> {
     return this.http.get(`${this.API_URL}/llaves`);
+  }
+
+  /**
+   * API POST /escenario
+   *
+   * @param {Object} body
+   * @return {*}  {Observable<any>}
+   * @memberof ApiService
+   */
+  public postEscenario(body: Object): Observable<any> {
+    return this.http.post(`${this.API_URL}/escenario`, body);
   }
 }
