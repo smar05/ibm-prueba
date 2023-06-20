@@ -17,7 +17,7 @@ Este proyecto consiste en una aplicación de intercambio de información encript
 2. Navega a la carpeta `server`: `cd server`
 3. Instala las dependencias: `npm install`
 4. Inicia el build de TypeScript a JavaScript: `npm run build`
-5. Inicia el servidor en modo de desarrollo: `npm run build`
+5. Inicia el servidor en modo de desarrollo: `npm run dev`
 
 El backend se encarga de generar las llaves asimétricas RSA, mientras que el frontend y el backend intercambian información encriptada usando las llaves generadas. Para ello, se utilizan las librerías "nose-jose" y "node-forge".
 
