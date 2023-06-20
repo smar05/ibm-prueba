@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -w",
+    "build-prod": "tsc",
     "dev": "nodemon build/index.js",
     "test": "jest"
   },
